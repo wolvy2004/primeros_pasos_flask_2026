@@ -1,0 +1,14 @@
+services:
+  backend:
+    build: backend
+    container_name: flask_api
+    ports:
+      - 5001:5000
+    volumes:
+      - ./backend:/app
+    networks:
+      - pwd_network
+
+networks:
+  pwd_network:
+    driver: bridge
