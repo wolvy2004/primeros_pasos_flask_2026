@@ -35,7 +35,7 @@ class UserController (Controller):
             
         if error is None:
             try:
-                user = User(nombre=nombre, email=email)
+                user = User(nombre=nombre, email=email, rol_id=1, password='123456')
                 db.session.add(user)
                 db.session.commit()
                 return jsonify({'message': "usuario creado con exito"}), 201

@@ -4,9 +4,12 @@ from app.models import db
 from app.config import config
 from app.routes.user_routes import users
 from app.routes.rol_routes import roles
+from flask_migrate import Migrate
 
 load_dotenv(override = True)
 import os
+migrate = Migrate()
+
 def create_app():
     app = Flask(__name__)
     env = os.getenv('FLASK_ENV', 'development')
@@ -24,5 +27,6 @@ def create_app():
     def saludo():
         return f'Hola desde programacion web dinamica 2026 saludo'
     db.init_app(app)
+    migrate.init_app(app=app, db=db)
     return app
     
