@@ -1,4 +1,5 @@
 from app.models import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     
@@ -32,5 +33,8 @@ class User(db.Model):
         'rol': self.rol.to_dict() if self.rol else None
       }
       
-    def validate_password(self):
-      pass
+    def validate_password(self, password:str) -> bool:
+      return check_password_hash(self.password, password)
+    
+    def generate_password(self, password:str):
+      self.password = generate_password_hash(password)
